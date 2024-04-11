@@ -8,9 +8,9 @@
 <div>
     <table>
         <thead>Lab week</thead>
-        <tr>
-            <td>
-
+        <tr th:each="array : ${bingo}">
+            <td th:each="item : ${array}">
+                <p th:text="${item}"></p>
             </td>
         </tr>
     </table>
