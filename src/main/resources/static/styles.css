@@ -1,0 +1,18 @@
+table {
+            border-collapse: collapse;
+            margin: auto; /* Center the table horizontally */
+            width: 400px; /* Set fixed width for the table */
+        }
+        caption {
+            font-weight: bold;
+            font-size: 20px;
+            padding: 10px;
+            caption-side: top;
+            text-align: center; /* Center the caption text */
+        }
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            width: 20%; /* Set equal width for each column */
+            text-align: center; /* Center align the text */
+        }

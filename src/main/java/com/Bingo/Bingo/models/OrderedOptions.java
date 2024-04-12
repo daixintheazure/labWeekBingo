@@ -39,7 +39,7 @@ public class OrderedOptions {
                         return options;
                     }
                     if (counter == 12) {
-                        rowList.add("Free Space");
+                        rowList.add("img:../static/img/labWeek.png");
                         j++;
                         rowList.add(tempRandom.get(counter));
                         counter++;
