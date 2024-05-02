@@ -12,10 +12,13 @@ public class OrderedOptions {
     public ArrayList<String> randomized() {
         ArrayList<String> tempList = this.array;
         ArrayList<String> randomizedList = new ArrayList<>();
-        while(tempList.size() > 0) {
+        for(int i =0; i < 24;) {
             int random = (int) (Math.random() * tempList.size());
-            randomizedList.add(tempList.get(random));
-            tempList.remove(random);
+            if(!randomizedList.contains(tempList.get(random))){
+                randomizedList.add(tempList.get(random));
+                i++;
+            }
+
         }
         return randomizedList;
     }
@@ -39,7 +42,7 @@ public class OrderedOptions {
                         return options;
                     }
                     if (counter == 12) {
-                        rowList.add("img:../static/img/labWeek.png");
+                        rowList.add("img:");
                         j++;
                         rowList.add(tempRandom.get(counter));
                         counter++;

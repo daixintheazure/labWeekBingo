@@ -40,9 +40,16 @@ public class CardController {
         selection.add("BROKEN GLUCOMETER");
         selection.add("ELAINE TAKES OUT THE TRASH");
 
-        OrderedOptions bingo = new OrderedOptions(selection);
+        OrderedOptions bingo1 = new OrderedOptions(selection);
+        OrderedOptions bingo2 = new OrderedOptions(selection);
+        OrderedOptions bingo3 = new OrderedOptions(selection);
 
-        model.addAttribute("bingo", bingo.getBingoSet());
+        ArrayList<OrderedOptions> bingo = new ArrayList<>();
+        bingo.add(bingo1);
+        bingo.add(bingo2);
+        bingo.add(bingo3);
+
+        model.addAttribute("bingoList", bingo);
 
 
         return "index";

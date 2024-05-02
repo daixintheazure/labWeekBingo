@@ -7,21 +7,20 @@
     <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
-<div>
-    <table>
+<div class="table-container" >
+    <table th:each="bingo : ${bingoList}">
         <caption>Lab week</caption>
-        <tr th:each="array : ${bingo}">
+        <tr th:each="array : ${bingo.getBingoSet()}">
             <td th:each="item : ${array}">
                 <p th:unless="${item.startsWith('img:')}">
                     <span th:text="${item}"></span>
                 </p>
                 <p th:if="${item.startsWith('img:')}">
-                    <img th:src="${item.substring(4)}">
+                    <img th:src="${item.substring(4)}" alt="Image">
                 </p>
             </td>
         </tr>
     </table>
 </div>
-
 </body>
 </html>

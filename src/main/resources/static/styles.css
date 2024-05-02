@@ -5,7 +5,7 @@ table {
         }
         caption {
             font-weight: bold;
-            font-size: 20px;
+            font-size: 40px;
             padding: 10px;
             caption-side: top;
             text-align: center; /* Center the caption text */
@@ -16,3 +16,6 @@ table {
             width: 20%; /* Set equal width for each column */
             text-align: center; /* Center align the text */
         }
+        .table-container {
+                    page-break-after: always; /* Add page break after the table */
+                }
