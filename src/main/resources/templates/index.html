@@ -7,11 +7,6 @@
     <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
-<form method="post">
-    <a>How many table would you like to create</a>
-    <input type="number" name="numberOfTables">
-    <input type="submit" value="Generate"/>
-    <hr/>
     <div class="table-container" th:each="bingo : ${bingoList}">
         <table >
             <caption>Lab week</caption>
@@ -28,7 +23,6 @@
         </table>
 <!--        <div class="pagebreak"></div>-->
     </div>
-</form>
 
 </body>
 </html>
