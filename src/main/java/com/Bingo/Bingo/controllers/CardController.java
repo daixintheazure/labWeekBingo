@@ -11,6 +11,11 @@ import java.util.ArrayList;
 @Controller
 public class CardController {
 
+    @GetMapping("create")
+    public String createBingoCards(Model model) {
+        return "create";
+    }
+
 
     @GetMapping("/")
     public String bingoCards(Model model) {
