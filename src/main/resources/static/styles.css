@@ -19,3 +19,10 @@ table {
         .table-container {
                     page-break-after: always; /* Add page break after the table */
                 }
+
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+        }
