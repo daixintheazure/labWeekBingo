@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo Cards</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div class="table-container" th:each="bingo : ${bingoList}">
+    <table >
+        <caption>Lab week</caption>
+        <tr th:each="array : ${bingo.getBingoSet()}">
+            <td th:each="item : ${array}">
+                <p th:unless="${item.startsWith('img:')}">
+                    <span th:text="${item}"></span>
+                </p>
+                <p th:if="${item.startsWith('img:')}">
+                    <img th:src="${item.substring(4)}" alt="Image">
+                </p>
+            </td>
+        </tr>
+    </table>
+    <!--        <div class="pagebreak"></div>-->
+</div>
+</body>
+</html>

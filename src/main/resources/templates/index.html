@@ -3,26 +3,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
     <link th:href="@{/styles.css}" rel="stylesheet">
+    <nav>
+        <a href="bingo/create">Create Bingo Card</a>
+        <a href="bingo/Edit">Edit Bingo Card</a>
+    </nav>
 </head>
 <body>
-    <div class="table-container" th:each="bingo : ${bingoList}">
-        <table >
-            <caption>Lab week</caption>
-            <tr th:each="array : ${bingo.getBingoSet()}">
-                <td th:each="item : ${array}">
-                    <p th:unless="${item.startsWith('img:')}">
-                        <span th:text="${item}"></span>
-                    </p>
-                    <p th:if="${item.startsWith('img:')}">
-                        <img th:src="${item.substring(4)}" alt="Image">
-                    </p>
-                </td>
-            </tr>
-        </table>
-<!--        <div class="pagebreak"></div>-->
-    </div>
+<div>
 
+
+</div>
 </body>
 </html>
