@@ -28,7 +28,6 @@ public class CardController {
     }
 
 
-
     @GetMapping("view")
     //Show list of List to select from
     public String viewCardsList(Model model) {
