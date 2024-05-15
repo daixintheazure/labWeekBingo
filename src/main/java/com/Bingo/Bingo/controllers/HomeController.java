@@ -1,5 +1,6 @@
 package com.Bingo.Bingo.controllers;
 
+import com.Bingo.Bingo.data.ListData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,7 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
-    @GetMapping
+    @GetMapping("/")
     public String index(Model model) {
 
         return "index";

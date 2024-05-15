@@ -12,7 +12,11 @@
 </head>
 <body>
 <div>
+    <a href="bingo/results">ViewTemp</a>
 
+    <li th:each="list : ${listData}">
+        <a th:href="@{'/bingo/results/' + ${}}" th:text="${}"></a>
+    </li>
 
 </div>
 </body>
