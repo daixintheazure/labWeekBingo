@@ -64,4 +64,8 @@ public final class ListData {
     public ArrayList<String> getArray(int index) {
         return array.get(index);
     }
+
+    public ArrayList<ArrayList> getList() {
+        return array;
+    }
 }
