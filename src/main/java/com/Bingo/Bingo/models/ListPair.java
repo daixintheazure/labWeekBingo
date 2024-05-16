@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonTypeId;
 import org.springframework.aot.generate.Generated;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 public class ListPair {
 
     private int id;
@@ -17,5 +19,36 @@ public class ListPair {
         this.array = array;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ListPair listPair = (ListPair) o;
+        return id == listPair.id;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<String> getArray() {
+        return array;
+    }
+
+    public void setArray(ArrayList<String> array) {
+        this.array = array;
+    }
 }
