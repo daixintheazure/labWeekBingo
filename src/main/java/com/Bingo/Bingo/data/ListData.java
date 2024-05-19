@@ -1,13 +1,17 @@
 package com.Bingo.Bingo.data;
 
+import com.Bingo.Bingo.models.ListPair;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public final class ListData {
 
-    private ArrayList<ArrayList> array = new ArrayList<>();
+    private ArrayList<ListPair> array = new ArrayList<>();
 
     private void exampleList() {
+
+
         ArrayList<String> selection = new ArrayList<String>();
         selection.add("CLOTTED CBC");
         selection.add("CALLED SERVICE");
@@ -34,7 +38,9 @@ public final class ListData {
         selection.add("BROKEN GLUCOMETER");
         selection.add("ELAINE TAKES OUT THE TRASH");
 
-        array.add(selection);
+        ListPair selections = new ListPair("Selection", selection);
+
+        array.add(selections);
     }
 
     public ListData() {
@@ -61,11 +67,11 @@ public final class ListData {
         return array.toString();
     }
 
-    public ArrayList<String> getArray(int index) {
+    public ListPair getArray(int index) {
         return array.get(index);
     }
 
-    public ArrayList<ArrayList> getList() {
+    public ArrayList<ListPair> getList() {
         return array;
     }
 }
