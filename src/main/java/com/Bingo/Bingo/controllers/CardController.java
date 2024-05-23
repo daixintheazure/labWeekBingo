@@ -39,7 +39,7 @@ public class CardController {
     @PostMapping("results")
     public String bingoCards(Model model) {
 
-        OrderedOptions bingo1 = new OrderedOptions(listData.getArray(0));
+        OrderedOptions bingo1 = new OrderedOptions(listData.getArray(0).getArray());
         //OrderedOptions bingo2 = new OrderedOptions(selection);
         //OrderedOptions bingo3 = new OrderedOptions(selection);
 

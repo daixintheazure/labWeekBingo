@@ -7,7 +7,7 @@
 <body>
 <div>
     <li th:each="list : ${listData}">
-        <a th:href="@{'/bingo/results/' + ${list}}" th:text="${list}"></a>
+        <a th:href="@{'/bingo/results/' + ${list}}" th:text="${list.name}"></a>
     </li>
 </div>
 
