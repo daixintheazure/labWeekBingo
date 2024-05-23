@@ -61,4 +61,10 @@ public class CardController {
         return "bingo/Edit";
     }
 
+    @PostMapping(value= "edits/{listPairId}")
+    public String displayEditListProcessing(Model model) {
+
+        return "bingo/Edit";
+    }
+
 }
