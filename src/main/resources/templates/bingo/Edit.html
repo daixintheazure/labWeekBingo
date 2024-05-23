@@ -10,6 +10,22 @@
     </nav>
 </head>
 <body>
+<form method="post">
+    <div>
+        <a>Select a list to edit</a>
+        <select name="list" id="list">
+            <option th:each="item : ${list}"
+            th:text="${item.name}"></option>
+        </select>
+
+    </div>
+
+    <input type="submit" value="Generate"/>
+</form>
+<hr/>
+<div>
+
+</div>
 
 </body>
 </html>

@@ -56,6 +56,7 @@ public class CardController {
 
     @GetMapping("Edit")
     public String editBingoCard (Model model) {
+        model.addAttribute("list", listData.getList());
 
         return "bingo/Edit";
     }
