@@ -10,12 +10,12 @@
     </nav>
 </head>
 <body>
-<form method="post">
+<form method="post" th:action="@{/bingo/Edit/{listPairId}}">
     <div>
         <a>Select a list to edit</a>
-        <select name="list" id="list">
+        <select name="listPairId" id="listPairId">
             <option th:each="item : ${list}"
-            th:text="${item.name}"></option>
+            th:text="${item.name}" th:value="${item.id}"></option>
         </select>
 
     </div>

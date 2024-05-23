@@ -4,10 +4,7 @@ import com.Bingo.Bingo.data.ListData;
 import com.Bingo.Bingo.models.OrderedOptions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -61,8 +58,9 @@ public class CardController {
         return "bingo/Edit";
     }
 
-    @PostMapping(value= "edits/{listPairId}")
-    public String displayEditListProcessing(Model model) {
+    @PostMapping(value= "Edit/{listPairId}")
+    public String displayEditListProcessing(Model model, @RequestParam(name = "listPairId") Integer listPairId) {
+        model.addAttribute("list", listData.getList());
 
         return "bingo/Edit";
     }
