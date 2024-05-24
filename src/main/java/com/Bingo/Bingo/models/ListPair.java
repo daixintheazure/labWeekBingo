@@ -13,10 +13,10 @@ public class ListPair {
     private String name;
     private ArrayList<String> array = new ArrayList<>();
 
-    public ListPair(String name, ArrayList<String> array) {
+    public ListPair(String name) {
         id = nextID++;
         this.name = name;
-        this.array = array;
+        //this.array = array;
     }
 
     @Override
@@ -50,5 +50,13 @@ public class ListPair {
 
     public void setArray(ArrayList<String> array) {
         this.array = array;
+    }
+
+    public void listPairAdd(String string) {
+        array.add(string);
+    }
+
+    public void listPairRemove (int index) {
+        array.remove(index);
     }
 }
