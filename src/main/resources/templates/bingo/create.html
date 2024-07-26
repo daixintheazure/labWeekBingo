@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/styles.css}" rel="stylesheet">
-    <nav>
-        <a href="/">Home</a>
-        <a href="Edit">Edit Bingo Card</a>
-    </nav>
+<head th:replace="fragments :: head">
 </head>
 <body>
+<header th:replace="fragments :: header"></header>
 <form method="post">
     <a>How many table would you like to create</a>
     <input type="number" name="numberOfTables">

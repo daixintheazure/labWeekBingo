@@ -24,7 +24,6 @@ public class CardController {
 
     }
 
-
     @GetMapping("view")
     //Show list of List to select from
     public String viewCardsList(Model model) {
@@ -61,6 +60,7 @@ public class CardController {
     @PostMapping(value= "Edit/{listPairId}")
     public String displayEditListProcessing(Model model, @RequestParam(name = "listPairId") Integer listPairId) {
         model.addAttribute("list", listData.getList());
+        model.addAttribute("items",listData.getArray(listPairId));
 
         return "bingo/Edit";
     }

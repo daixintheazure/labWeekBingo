@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Bingo Card</title>
-    <link th:href="@{/styles.css}" rel="stylesheet">
-    <nav>
-        <a href="create">Create Bingo Card</a>
-        <a href="/">Home</a>
-    </nav>
-</head>
+<head th:replace="fragments :: head">
 <body>
+<header th:replace="fragments :: header"></header>
 <form method="post" th:action="@{/bingo/Edit/{listPairId}}">
     <div>
         <a>Select a list to edit</a>
@@ -24,6 +17,12 @@
 </form>
 <hr/>
 <div>
+    <ol th:each="thing: ${items}">
+        <li th:each="result :${thing.array}">
+            <a   th:text="${result}"></a>
+        </li>
+    </ol>
+
 
 </div>
 
