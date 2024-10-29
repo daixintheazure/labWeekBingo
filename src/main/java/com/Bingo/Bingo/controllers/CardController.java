@@ -32,8 +32,8 @@ public class CardController {
     }
 
 
-    @GetMapping("results")
-    public String bingoCards(Model model) {
+    @GetMapping("results/{listPairId}")
+    public String bingoCards(Model model, @PathVariable(name = "listPairId") Integer listPairId) {
 
         OrderedOptions bingo1 = new OrderedOptions(listData.getArray(0).getArray());
         //OrderedOptions bingo2 = new OrderedOptions(selection);
