@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("bingo")
@@ -35,18 +33,12 @@ public class CardController {
     @GetMapping("results/{listPairId}")
     public String bingoCards(Model model, @PathVariable(name = "listPairId") Integer listPairId) {
 
-        OrderedOptions bingo1 = new OrderedOptions(listData.getArray(0).getArray());
-        //OrderedOptions bingo2 = new OrderedOptions(selection);
-        //OrderedOptions bingo3 = new OrderedOptions(selection);
+        OrderedOptions bingo1 = new OrderedOptions(listData.getArray(listPairId).getArray());
 
         ArrayList<OrderedOptions> bingo = new ArrayList<>();
         bingo.add(bingo1);
-        //bingo.add(bingo2);
-        //bingo.add(bingo3);
 
         model.addAttribute("bingoList", bingo);
-
-
         return "bingo/results";
     }
 
