@@ -1,8 +1,6 @@
 package com.Bingo.Bingo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,6 +16,10 @@ public class BingoOption {
     @NotNull
     @NotBlank
     private String bingoOption;
+
+    @ManyToOne
+    @JoinColumn(name = "list")
+    private List list;
 
     public BingoOption() {}
 

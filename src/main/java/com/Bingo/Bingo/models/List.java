@@ -18,6 +18,9 @@ public class List {
     @NotBlank
     private String name;
 
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL)
+    ArrayList<BingoOption> bingoOptionList = new ArrayList<>();
+
     public List () {}
 
     public List(String name) {
@@ -53,4 +56,9 @@ public class List {
     public void setName(String name) {
         this.name = name;
     }
+
+    public ArrayList<BingoOption> getBingoOptionList() {
+        return bingoOptionList;
+    }
+
 }
