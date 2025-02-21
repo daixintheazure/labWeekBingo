@@ -5,16 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Entity
-public class BingoCard {
+public class BingoCardGen {
     @Id
     @GeneratedValue
     private int id;
 
     private ArrayList<BingoOption> bingoCardOptions = new ArrayList<>();
 
-    public BingoCard(ArrayList<BingoOption> bingoCardOptions) {
+    public BingoCardGen(ArrayList<BingoOption> bingoCardOptions) {
         this.bingoCardOptions = bingoCardOptions;
     }
 
@@ -32,7 +33,7 @@ public class BingoCard {
         return randomizedList;
     }
 
-    public ArrayList<ArrayList<String>> bingoCard() {
+    public ArrayList<ArrayList<String>> bingoCards() {
         ArrayList<String> tempRandom = this.randomized();
 
         ArrayList<ArrayList<String>> options = new ArrayList<ArrayList<String>>();
@@ -64,6 +65,34 @@ public class BingoCard {
 
         }
         return options;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BingoCardGen that = (BingoCardGen) o;
+        return id == that.id && Objects.equals(bingoCardOptions, that.bingoCardOptions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bingoCardOptions);
+    }
+
+    @Override
+    public String toString() {
+        return "BingoCardGen{" +
+                "bingoCardOptions=" + bingoCardOptions +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<ArrayList<String>> getBingoCards() {
+        return this.bingoCards();
     }
 
 }

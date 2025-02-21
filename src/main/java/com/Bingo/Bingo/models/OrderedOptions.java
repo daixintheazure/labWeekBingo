@@ -82,8 +82,7 @@ public class OrderedOptions {
     }
 
     public ArrayList<ArrayList<String>> getBingoSet(){
-        ArrayList<ArrayList<String>> bingoCard = this.bingoCard();
-        return bingoCard;
+        return this.bingoCard();
     }
 
     public void setArray(ArrayList<String> array) {
