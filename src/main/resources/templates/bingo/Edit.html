@@ -5,9 +5,9 @@
 <header th:replace="fragments :: header"></header>
 <form method="post" th:action="@{/bingo/Edit/{listPairId}}">
     <div>
-        <a>Select a list to edit</a>
+        <a>Select a bingoOptionsList to edit</a>
         <select name="listPairId" id="listPairId">
-            <option th:each="item : ${list}"
+            <option th:each="item : ${bingoOptionsList}"
             th:text="${item.name}" th:value="${item.id}"></option>
         </select>
 

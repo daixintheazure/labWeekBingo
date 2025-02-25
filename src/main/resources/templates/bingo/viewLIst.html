@@ -4,8 +4,8 @@
 <body>
 <header th:replace="fragments :: header"></header>
 <div>
-    <li th:each="list : ${listData}">
-        <a th:href="@{'/bingo/results/' + ${list}}" th:text="${list.name}"></a>
+    <li th:each="bingoOptionsList : ${listData}">
+        <a th:href="@{'/bingo/results/' + ${bingoOptionsList}}" th:text="${bingoOptionsList.name}"></a>
     </li>
 </div>
 

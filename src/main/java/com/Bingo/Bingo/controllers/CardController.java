@@ -1,7 +1,10 @@
 package com.Bingo.Bingo.controllers;
 
+import com.Bingo.Bingo.data.BingoOptionRepository;
 import com.Bingo.Bingo.data.ListData;
+import com.Bingo.Bingo.data.BingoOptionsListRepository;
 import com.Bingo.Bingo.models.OrderedOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,11 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("bingo")
 public class CardController {
+
+    @Autowired
+    private BingoOptionRepository bingoOptionRepository;
+    @Autowired
+    private BingoOptionsListRepository bingoOptionsListRepository;
 
     ListData listData = new ListData();
 
@@ -25,13 +33,16 @@ public class CardController {
     @GetMapping("view")
     //Show list of List to select from
     public String viewCardsList(Model model) {
-            model.addAttribute("listData", listData.getList());
-            return "bingo/view";
+        //model.addAttribute("listData", listData.getList());
+        model.addAttribute("listData", bingoOptionsListRepository.findAll());
+        return "bingo/view";
     }
 
 
     @GetMapping("results/{listPairId}")
     public String bingoCards(Model model, @PathVariable(name = "listPairId") Integer listPairId) {
+
+
 
         OrderedOptions bingo1 = new OrderedOptions(listData.getArray(listPairId).getArray());
 

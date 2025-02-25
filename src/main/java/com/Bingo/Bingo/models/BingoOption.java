@@ -18,8 +18,8 @@ public class BingoOption {
     private String bingoOption;
 
     @ManyToOne
-    @JoinColumn(name = "list")
-    private List list;
+    @JoinColumn(name = "bingoOptionsList_id")
+    private BingoOptionsList bingoOptionsList;
 
     public BingoOption() {}
 

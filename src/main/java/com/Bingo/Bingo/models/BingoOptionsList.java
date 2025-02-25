@@ -5,10 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class List {
+public class BingoOptionsList {
 
     @Id
     @GeneratedValue
@@ -18,12 +19,13 @@ public class List {
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL)
-    ArrayList<BingoOption> bingoOptionList = new ArrayList<>();
+    @OneToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL)
+    List<BingoOption> bingoOptionsList = new ArrayList<>();
 
-    public List () {}
 
-    public List(String name) {
+    public BingoOptionsList() {}
+
+    public BingoOptionsList(String name) {
         this.name = name;
     }
 
@@ -31,8 +33,8 @@ public class List {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        List list = (List) o;
-        return id == list.id && Objects.equals(name, list.name);
+        BingoOptionsList bingoOptionsList = (BingoOptionsList) o;
+        return id == bingoOptionsList.id && Objects.equals(name, bingoOptionsList.name);
     }
 
     @Override
@@ -57,8 +59,11 @@ public class List {
         this.name = name;
     }
 
-    public ArrayList<BingoOption> getBingoOptionList() {
-        return bingoOptionList;
+    public List<BingoOption> getBingoOptionsList() {
+        return bingoOptionsList;
     }
 
+    public void setBingoOptionsList(List<BingoOption> bingoOptionsList) {
+        this.bingoOptionsList = bingoOptionsList;
+    }
 }
