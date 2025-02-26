@@ -3,6 +3,9 @@ package com.Bingo.Bingo.controllers;
 import com.Bingo.Bingo.data.BingoOptionRepository;
 import com.Bingo.Bingo.data.ListData;
 import com.Bingo.Bingo.data.BingoOptionsListRepository;
+import com.Bingo.Bingo.models.BingoCardGen;
+import com.Bingo.Bingo.models.BingoOption;
+import com.Bingo.Bingo.models.BingoOptionsList;
 import com.Bingo.Bingo.models.OrderedOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("bingo")
@@ -38,24 +42,49 @@ public class CardController {
         return "bingo/view";
     }
 
+    @GetMapping("bingoLists")
+    public String bingoListIndex(Model model) {
 
-    @GetMapping("results/{listPairId}")
-    public String bingoCards(Model model, @PathVariable(name = "listPairId") Integer listPairId) {
+        return "bingo/bingoLists";
+    }
+
+    @GetMapping("bingoOptions")
+    public String bingoOptions(Model model) {
+
+        return "bingo/bingoOptions";
+    }
+
+
+    @GetMapping("results/{bingoOptionsListId}")
+    public String bingoCards(Model model, @PathVariable Integer bingoOptionsListId) {
+
+        Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(bingoOptionsListId);
+        if (optionalBingoOptionsList.isPresent()){
+            BingoOptionsList bingoOptionsList = (BingoOptionsList) optionalBingoOptionsList.get();
+
+            BingoCardGen bingo1 = new BingoCardGen((ArrayList<BingoOption>) bingoOptionsList.getBingoOptionsList());
 
 
 
-        OrderedOptions bingo1 = new OrderedOptions(listData.getArray(listPairId).getArray());
 
-        ArrayList<OrderedOptions> bingo = new ArrayList<>();
-        bingo.add(bingo1);
+            model.addAttribute("bingoList", bingo1);
+            return "bingo/results";
+        }
 
-        model.addAttribute("bingoList", bingo);
+        //ArrayList<String> opt = new ArrayList<String>(Integer.parseInt(bingoOptionsListRepository.findById(listPairId).toString()));
+
+        //OrderedOptions bingo1 = new OrderedOptions(opt);
+
+        //ArrayList<OrderedOptions> bingo = new ArrayList<>();
+        //bingo.add(bingo1);
+
+        //model.addAttribute("bingoList", bingo);
         return "bingo/results";
     }
 
     @GetMapping("Edit")
     public String editBingoCard (Model model) {
-        model.addAttribute("list", listData.getList());
+        model.addAttribute("list", bingoOptionsListRepository.findAll());
 
         return "bingo/Edit";
     }

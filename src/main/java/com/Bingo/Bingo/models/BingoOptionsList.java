@@ -19,8 +19,8 @@ public class BingoOptionsList {
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL)
-    List<BingoOption> bingoOptionsList = new ArrayList<>();
+    @OneToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<BingoOption> bingoOptionsList = new ArrayList<>();
 
 
     public BingoOptionsList() {}
@@ -66,4 +66,6 @@ public class BingoOptionsList {
     public void setBingoOptionsList(List<BingoOption> bingoOptionsList) {
         this.bingoOptionsList = bingoOptionsList;
     }
+
+
 }
