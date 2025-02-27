@@ -19,7 +19,9 @@ public class BingoOptionsList {
     @NotBlank(message = "Name may not be blank")
     private String name;
 
-    @ManyToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(name = "bingo_options_mapping", joinColumns = @JoinColumn(name = "bingo_id"),
+    inverseJoinColumns = @JoinColumn(name = "option_id"))
     private List<BingoOption> bingoOptionsList = new ArrayList<>();
 
 

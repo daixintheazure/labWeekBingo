@@ -75,24 +75,14 @@ public class CardController {
     @PostMapping("bingoOptions")
     public String processNewBingoOption(Model model,
                                         @ModelAttribute @Valid BingoOption newBingoOption,
-                                        Errors errors,
-                                        @RequestParam(required = false) String selectBingoOptionsList) {
+                                        Errors errors) {
 
-        System.out.println("Received selectBingoOptionsList: " + selectBingoOptionsList);
-
-        if (errors.hasErrors() || selectBingoOptionsList == null || !selectBingoOptionsList.matches("\\d+")) {
-            model.addAttribute("error", "Please select a valid Bingo Options List.");
+        if (errors.hasErrors()) {
+            model.addAttribute("error", "new error message.");
             return "/bingo/bingoOptions";
         }
 
-        Integer listId = Integer.parseInt(selectBingoOptionsList);
-        Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(listId);
-
-        if (optionalBingoOptionsList.isPresent()) {
-            BingoOptionsList bingoOptionsList = optionalBingoOptionsList.get();
-            newBingoOption.setBingoOptionsList(bingoOptionsList);
-            bingoOptionRepository.save(newBingoOption);
-        }
+        bingoOptionRepository.save(newBingoOption);
 
         return "redirect:/bingo/bingoOptions";
     }

@@ -17,16 +17,15 @@ public class BingoOption {
 
     @NotNull
     @NotBlank
-    private String bingoOption;
+    private String name;
 
     @ManyToMany
-    @JoinColumn(name = "bingoOptionsList_id")
     private List<BingoOptionsList> bingoOptionsList = new ArrayList<>();
 
     public BingoOption() {}
 
-    public BingoOption(String option) {
-        this.bingoOption = option;
+    public BingoOption(String name) {
+        this.name = name;
     }
 
     @Override
@@ -34,17 +33,17 @@ public class BingoOption {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BingoOption that = (BingoOption) o;
-        return id == that.id && Objects.equals(bingoOption, that.bingoOption);
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bingoOption);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
-        return bingoOption;
+        return name;
     }
 
     public int getId() {
@@ -55,12 +54,12 @@ public class BingoOption {
         this.id = id;
     }
 
-    public String getBingoOption() {
-        return bingoOption;
+    public String getName() {
+        return name;
     }
 
-    public void setBingoOption(String bingoOption) {
-        this.bingoOption = bingoOption;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<BingoOptionsList> getBingoOptionsList() {

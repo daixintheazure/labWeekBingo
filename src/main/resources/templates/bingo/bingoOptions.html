@@ -3,9 +3,40 @@
 <head th:replace="fragments :: head">
 </head>
 <body>
-<h1></h1>
+<h1>Bingo Options</h1>
 <header th:replace="fragments :: header"></header>
 
+<form method="post" th:action="@{/bingo/bingoOptions}">
+    <div>
+        <label>
+            Bingo Option:
+            <input th:field="${bingoOption.name}">
+        </label>
+    </div>
+<!--    <div>-->
+<!--        <label>Select Bingo Options List:</label>-->
+<!--        <select name="selectBingoOptionsList" id="selectBingoOptionsList">-->
+<!--            <option value="" disabled selected>Select an Option</option>-->
+<!--            <option th:each="list : ${bingoOptionsList}"-->
+<!--                    th:value="${list.id}"-->
+<!--                    th:text="${list.name}">-->
+<!--            </option>-->
+<!--        </select>-->
+<!--    </div>-->
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
 
+<hr/>
+
+<h2>Existing Bingo Options</h2>
+<div>
+    <ol>
+        <li th:each="option : ${bOptions}">
+            <span th:text="${option.name}"></span>
+        </li>
+    </ol>
+</div>
 </body>
 </html>
