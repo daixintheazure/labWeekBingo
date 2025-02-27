@@ -5,7 +5,22 @@
 <body>
 <h1></h1>
 <header th:replace="fragments :: header"></header>
+<form method="post" th:action="@{/bingo/bingoLists}">
+    <div>
+        <input th:field="${bingoOptionsList.name}"/>
+        <p th:errors="${bingoOptionsList.name}"></p>
+        <input type="submit" value="Submit"/>
+    </div>
 
+</form>
+<hr/>
+<div>
+    <ol th:each="list: ${bingolist}">
+        <li th:each="listname :${list.name}">
+            <a th:text="${listname}"></a>
+        </li>
+    </ol>
+</div>
 
 </body>
 </html>

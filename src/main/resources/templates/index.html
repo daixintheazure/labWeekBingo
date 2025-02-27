@@ -3,18 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head">
 <body>
-<header>
-    <nav>
-        <!--    <h1 th:text="">Page Name</h1>-->
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="bingo/Edit">Edit Bingo Card</a></li>
-            <li class="nav-item"><a class="nav-link" href="bingo/bingoList/index">Bingo List</a></li>
-            <li class="nav-item"><a class="nav-link" href="bingo/bingoOptions/index">Bingo Options</a></li>
-            <li class="nav-item"><a class="nav-link" href=""></a></li>
-        </ul>
-    </nav>
-</header>
+<header th:replace="fragments :: header"></header>
 <div>
     <a href="bingo/view">ViewTemp</a>
 

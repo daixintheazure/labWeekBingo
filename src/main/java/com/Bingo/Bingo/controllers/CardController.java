@@ -7,12 +7,15 @@ import com.Bingo.Bingo.models.BingoCardGen;
 import com.Bingo.Bingo.models.BingoOption;
 import com.Bingo.Bingo.models.BingoOptionsList;
 import com.Bingo.Bingo.models.OrderedOptions;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -44,15 +47,56 @@ public class CardController {
 
     @GetMapping("bingoLists")
     public String bingoListIndex(Model model) {
+        model.addAttribute("bingolist", bingoOptionsListRepository.findAll());
+        model.addAttribute(new BingoOptionsList());
 
         return "bingo/bingoLists";
     }
 
+    @PostMapping("bingoLists")
+    public String processNewBingoList(Model model, @ModelAttribute @Valid BingoOptionsList newBingoOptionsList,
+                                      Errors errors) {
+        if(errors.hasErrors()){
+            return "bingo/bingoLists";
+        }
+        bingoOptionsListRepository.save(newBingoOptionsList);
+        return "redirect:/bingo/bingoLists";
+    }
+
     @GetMapping("bingoOptions")
     public String bingoOptions(Model model) {
+        model.addAttribute("bOptions", bingoOptionRepository.findAll());
+        model.addAttribute("bingoOptionsList", bingoOptionsListRepository.findAll());
+        model.addAttribute("bingoOption",new BingoOption());
 
         return "bingo/bingoOptions";
     }
+
+    @PostMapping("bingoOptions")
+    public String processNewBingoOption(Model model,
+                                        @ModelAttribute @Valid BingoOption newBingoOption,
+                                        Errors errors,
+                                        @RequestParam(required = false) String selectBingoOptionsList) {
+
+        System.out.println("Received selectBingoOptionsList: " + selectBingoOptionsList);
+
+        if (errors.hasErrors() || selectBingoOptionsList == null || !selectBingoOptionsList.matches("\\d+")) {
+            model.addAttribute("error", "Please select a valid Bingo Options List.");
+            return "/bingo/bingoOptions";
+        }
+
+        Integer listId = Integer.parseInt(selectBingoOptionsList);
+        Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(listId);
+
+        if (optionalBingoOptionsList.isPresent()) {
+            BingoOptionsList bingoOptionsList = optionalBingoOptionsList.get();
+            newBingoOption.setBingoOptionsList(bingoOptionsList);
+            bingoOptionRepository.save(newBingoOption);
+        }
+
+        return "redirect:/bingo/bingoOptions";
+    }
+
 
 
     @GetMapping("results/{bingoOptionsListId}")

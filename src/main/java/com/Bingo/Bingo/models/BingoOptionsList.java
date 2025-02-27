@@ -12,14 +12,14 @@ import java.util.Objects;
 public class BingoOptionsList {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "Name may not be blank")
     private String name;
 
-    @OneToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "bingoOptionsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BingoOption> bingoOptionsList = new ArrayList<>();
 
 
