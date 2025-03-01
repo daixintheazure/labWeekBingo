@@ -17,7 +17,7 @@
 <div>
     <ol th:each="list: ${bingolist}">
         <li th:each="listname :${list.name}">
-            <a th:text="${listname}"></a>
+            <a th:href="@{'/bingo/bingoListEdit/' + ${list.id}}" th:text="${listname}"></a>
         </li>
     </ol>
 </div>

@@ -63,6 +63,30 @@ public class CardController {
         return "redirect:/bingo/bingoLists";
     }
 
+    @GetMapping("bingoListEdit/{bingoOptionsListId}")
+    public String bingoListEdit (Model model, @PathVariable Integer bingoOptionsListId) {
+        model.addAttribute("bingoOptions", bingoOptionRepository.findAll());
+
+        Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(bingoOptionsListId);
+        if (optionalBingoOptionsList.isPresent()){
+            BingoOptionsList bingoOptionsList = (BingoOptionsList) optionalBingoOptionsList.get();
+            model.addAttribute("listName", bingoOptionsList);
+
+
+            return "bingo/bingoListEdit";
+        }
+
+
+        return "/bingo/bingoListEdit";
+    }
+
+    @PostMapping()
+    public String processBingoListEdit(Model model) {
+
+
+        return "/bingo/bingoListEdit";
+    }
+
     @GetMapping("bingoOptions")
     public String bingoOptions(Model model) {
         model.addAttribute("bOptions", bingoOptionRepository.findAll());
@@ -118,7 +142,7 @@ public class CardController {
 
     @GetMapping("Edit")
     public String editBingoCard (Model model) {
-        model.addAttribute("list", bingoOptionsListRepository.findAll());
+        model.addAttribute("bingoOptionsList", bingoOptionsListRepository.findAll());
 
         return "bingo/Edit";
     }
