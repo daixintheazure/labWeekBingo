@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
-<h1></h1>
 <header th:replace="fragments :: header"></header>
 
-<a th:text="${listName}"></a>
+<h2 th:text="${listName.name}"></h2>
 
-<ol>
-    <li th:each="item : ${bingoOptions}">
-        <a th:text="${item.name}"></a>
-    </li>
-</ol>
+<div>
+    <ol>
+        <li th:each="item : ${listName.bingoOptionsList}">
+            <span th:text="${item.name}"></span>
+        </li>
+    </ol>
+</div>
 
+<!-- Error Message -->
+<p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+<hr>
+
+<!-- Form to submit updated Bingo Options -->
+<form method="post" action="/bingo/bingoListEdit">
+    <!-- Hidden field to store the BingoOptionsList ID -->
+    <input type="hidden" name="bingoOptionsListId" th:value="${listName.id}">
+
+    <div>
+        <th:block th:each="option : ${bingoOptions}">
+            <input type="checkbox" name="bingoOption" th:value="${option.id}"
+                   th:checked="${listName.bingoOptionsList.contains(option)}">
+            <label th:text="${option.name}"></label>
+        </th:block>
+    </div>
+
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
 
 </body>
 </html>

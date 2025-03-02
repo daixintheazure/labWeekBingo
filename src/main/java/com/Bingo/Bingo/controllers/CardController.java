@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,13 +65,14 @@ public class CardController {
     }
 
     @GetMapping("bingoListEdit/{bingoOptionsListId}")
-    public String bingoListEdit (Model model, @PathVariable Integer bingoOptionsListId) {
+    public String bingoListEdit (Model model, @PathVariable int bingoOptionsListId) {
         model.addAttribute("bingoOptions", bingoOptionRepository.findAll());
 
         Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(bingoOptionsListId);
         if (optionalBingoOptionsList.isPresent()){
             BingoOptionsList bingoOptionsList = (BingoOptionsList) optionalBingoOptionsList.get();
             model.addAttribute("listName", bingoOptionsList);
+
 
 
             return "bingo/bingoListEdit";
@@ -80,12 +82,34 @@ public class CardController {
         return "/bingo/bingoListEdit";
     }
 
-    @PostMapping()
-    public String processBingoListEdit(Model model) {
+    @PostMapping("bingoListEdit")
+    public String processBingoListEdit(Model model,
+                                       @RequestParam(required = false) List<Integer> bingoOption,
+                                       @ModelAttribute BingoOptionsList bingoOptionsList,
+                                       @RequestParam int bingoOptionsListId) {
 
+        Optional<BingoOptionsList> optionalBingoOptionsList = bingoOptionsListRepository.findById(bingoOptionsListId);
 
-        return "/bingo/bingoListEdit";
+        if (optionalBingoOptionsList.isPresent()) {
+            BingoOptionsList existingBingoOptionsList = optionalBingoOptionsList.get();
+
+            // Ensure bingoOption is not null by using an empty list as default
+            List<BingoOption> bingoOptionObject = (List<BingoOption>) bingoOptionRepository.findAllById(
+                    bingoOption != null ? bingoOption : Collections.emptyList()
+            );
+
+            existingBingoOptionsList.setBingoOptionsList(bingoOptionObject);
+            bingoOptionsListRepository.save(existingBingoOptionsList);
+
+            return "redirect:/bingo/bingoListEdit/" + bingoOptionsListId; // Redirect to the same edit page
+        }
+
+        model.addAttribute("error", "Bingo List not found!");
+        return "bingo/bingoListEdit";
     }
+
+
+
 
     @GetMapping("bingoOptions")
     public String bingoOptions(Model model) {

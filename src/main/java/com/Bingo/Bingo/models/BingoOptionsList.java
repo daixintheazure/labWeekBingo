@@ -65,6 +65,8 @@ public class BingoOptionsList {
         return bingoOptionsList;
     }
 
+
+
     public void setBingoOptionsList(List<BingoOption> bingoOptionsList) {
         this.bingoOptionsList = bingoOptionsList;
     }
