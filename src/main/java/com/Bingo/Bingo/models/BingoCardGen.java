@@ -82,9 +82,7 @@ public class BingoCardGen {
 
     @Override
     public String toString() {
-        return "BingoCardGen{" +
-                "bingoCardOptions=" + bingoCardOptions +
-                '}';
+        return bingoCardOptions.toString();
     }
 
     public int getId() {

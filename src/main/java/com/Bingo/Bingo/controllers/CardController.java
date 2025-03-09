@@ -144,10 +144,11 @@ public class CardController {
         if (optionalBingoOptionsList.isPresent()){
             BingoOptionsList bingoOptionsList = (BingoOptionsList) optionalBingoOptionsList.get();
 
-            BingoCardGen bingo1 = new BingoCardGen((ArrayList<BingoOption>) bingoOptionsList.getBingoOptionsList());
+            //Ensure safe conversion to a ArrayList
+            List<BingoOption> optionList = bingoOptionsList.getBingoOptionsList();
+            ArrayList<BingoOption> bingoOptions = new ArrayList<>(optionList != null? optionList : Collections.emptyList());
 
-
-
+            BingoCardGen bingo1 = new BingoCardGen(bingoOptions);
 
             model.addAttribute("bingoList", bingo1);
             return "bingo/results";
@@ -161,6 +162,7 @@ public class CardController {
         //bingo.add(bingo1);
 
         //model.addAttribute("bingoList", bingo);
+        model.addAttribute("error", "Bingo list not found");
         return "bingo/results";
     }
 
