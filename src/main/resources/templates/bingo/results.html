@@ -7,7 +7,7 @@
 <div class="table-container" th:each="bingo : ${bingoList}">
     <table style="width:60%">
         <caption>Lab week</caption>
-        <tr  th:each="array : ${bingoList.getBingoCards()}">
+        <tr  th:each="array : ${bingoList.getBingoCard()}">
             <td style="height:100px" th:each="item : ${array}">
                 <p th:unless="${item.startsWith('img:')}">
                     <span th:text="${item}"></span>

@@ -24,6 +24,9 @@ public class BingoOptionsList {
     inverseJoinColumns = @JoinColumn(name = "option_id"))
     private List<BingoOption> bingoOptionsList = new ArrayList<>();
 
+    @OneToMany (mappedBy = "bingoOptionsList", cascade = CascadeType.ALL)
+    private List<BingoCard> bingoCards;
+
 
     public BingoOptionsList() {}
 
@@ -71,5 +74,11 @@ public class BingoOptionsList {
         this.bingoOptionsList = bingoOptionsList;
     }
 
+    public List<BingoCard> getBingoCards() {
+        return bingoCards;
+    }
 
+    public void setBingoCards(List<BingoCard> bingoCards) {
+        this.bingoCards = bingoCards;
+    }
 }

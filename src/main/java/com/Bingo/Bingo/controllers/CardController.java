@@ -1,12 +1,10 @@
 package com.Bingo.Bingo.controllers;
 
+import com.Bingo.Bingo.data.BingoCardRepository;
 import com.Bingo.Bingo.data.BingoOptionRepository;
 import com.Bingo.Bingo.data.ListData;
 import com.Bingo.Bingo.data.BingoOptionsListRepository;
-import com.Bingo.Bingo.models.BingoCardGen;
-import com.Bingo.Bingo.models.BingoOption;
-import com.Bingo.Bingo.models.BingoOptionsList;
-import com.Bingo.Bingo.models.OrderedOptions;
+import com.Bingo.Bingo.models.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +25,8 @@ public class CardController {
     private BingoOptionRepository bingoOptionRepository;
     @Autowired
     private BingoOptionsListRepository bingoOptionsListRepository;
+    @Autowired
+    private BingoCardRepository bingoCardRepository;
 
     ListData listData = new ListData();
 
@@ -149,19 +149,13 @@ public class CardController {
             ArrayList<BingoOption> bingoOptions = new ArrayList<>(optionList != null? optionList : Collections.emptyList());
 
             BingoCardGen bingo1 = new BingoCardGen(bingoOptions);
+            BingoCard bingoCard = new BingoCard(bingo1.getBingoCards());
+            bingoCardRepository.save(bingoCard);
 
-            model.addAttribute("bingoList", bingo1);
+            model.addAttribute("bingoList", bingoCard);
             return "bingo/results";
         }
 
-        //ArrayList<String> opt = new ArrayList<String>(Integer.parseInt(bingoOptionsListRepository.findById(listPairId).toString()));
-
-        //OrderedOptions bingo1 = new OrderedOptions(opt);
-
-        //ArrayList<OrderedOptions> bingo = new ArrayList<>();
-        //bingo.add(bingo1);
-
-        //model.addAttribute("bingoList", bingo);
         model.addAttribute("error", "Bingo list not found");
         return "bingo/results";
     }
@@ -173,12 +167,5 @@ public class CardController {
         return "bingo/Edit";
     }
 
-    @PostMapping(value= "Edit/{listPairId}")
-    public String displayEditListProcessing(Model model, @RequestParam(name = "listPairId") Integer listPairId) {
-        model.addAttribute("list", listData.getList());
-        model.addAttribute("items",listData.getArray(listPairId));
-
-        return "bingo/Edit";
-    }
 
 }

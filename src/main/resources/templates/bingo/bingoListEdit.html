@@ -26,9 +26,11 @@
 
     <div>
         <th:block th:each="option : ${bingoOptions}">
-            <input type="checkbox" name="bingoOption" th:value="${option.id}"
-                   th:checked="${listName.bingoOptionsList.contains(option)}">
-            <label th:text="${option.name}"></label>
+            <li>
+                <input type="checkbox" name="bingoOption" th:value="${option.id}"
+                       th:checked="${listName.bingoOptionsList.contains(option)}">
+                <label th:text="${option.name}"></label>
+            </li>
         </th:block>
     </div>
 
