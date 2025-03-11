@@ -150,6 +150,8 @@ public class CardController {
 
             BingoCardGen bingo1 = new BingoCardGen(bingoOptions);
             BingoCard bingoCard = new BingoCard(bingo1.getBingoCards());
+
+            bingoCard.setBingoOptionsList(bingoOptionsList);
             bingoCardRepository.save(bingoCard);
 
             model.addAttribute("bingoList", bingoCard);
@@ -160,8 +162,25 @@ public class CardController {
         return "bingo/results";
     }
 
+    @GetMapping("bingoCard/{bingoCardId}")
+    public String bingoCard(Model model, @PathVariable Integer bingoCardId) {
+
+        Optional<BingoCard> optionalBingoCard = bingoCardRepository.findById(bingoCardId);
+        if (optionalBingoCard.isPresent()) {
+            BingoCard bingoCard = (BingoCard) optionalBingoCard.get();
+
+            model.addAttribute("bingoList", bingoCard);
+
+            return "bingo/bingoCard";
+        }
+
+        return "bingo/bingoCard";
+    }
+
     @GetMapping("Edit")
     public String editBingoCard (Model model) {
+
+
         model.addAttribute("bingoOptionsList", bingoOptionsListRepository.findAll());
 
         return "bingo/Edit";

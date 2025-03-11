@@ -9,12 +9,12 @@
         <ol>
             <li th:each="item : ${bingoOptionsList}">
                 <label th:text="${item.name}"></label>
-                <button>Generate Bingo Card</button>
+                <a th:href="@{'/bingo/results/' + ${item.id}}">
+                    <button >Generate Bingo Card</button>
+                </a>
                 <div th:each="card : ${item.bingoCards}">
-                    <a  th:text="${card.getId()}"></a>
+                    <a  th:href="@{'/bingo/bingoCard/' + ${card.id}}" th:text="${card.id}"></a>
                 </div>
-
-
             </li>
 
         </ol>
