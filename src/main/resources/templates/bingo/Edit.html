@@ -13,7 +13,9 @@
                     <button >Generate Bingo Card</button>
                 </a>
                 <div th:each="card : ${item.bingoCards}">
-                    <a  th:href="@{'/bingo/bingoCard/' + ${card.id}}" th:text="${card.id}"></a>
+                    <a  th:href="@{'/bingo/bingoCard/' + ${card.id}}">
+                        <button th:text="${card.name != null? card.name : card.id}"></button>
+                    </a>
                 </div>
             </li>
 
