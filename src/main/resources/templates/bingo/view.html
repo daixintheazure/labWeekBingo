@@ -1,13 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments :: head">
+<head th:replace="fragments :: head"></head>
 <body>
 <header th:replace="fragments :: header"></header>
-<div>
-    <li th:each="bingoOptionsList : ${listData}">
-        <a th:href="@{'/bingo/results/' + ${bingoOptionsList.id}}" th:text="${bingoOptionsList.name}"></a>
-    </li>
+
+<h2>Select a Bingo List</h2>
+<label for="bingoOptions">Choose:</label>
+<select id="bingoOptions" onchange="updateBingoCards()">
+    <option value="">-- Select a Bingo List --</option>
+    <option th:each="item : ${bingoOptionsList}"
+            th:value="${item.id}"
+            th:text="${item.name}">
+    </option>
+</select>
+
+<!-- Bingo Cards Section -->
+<div id="bingoCardsSection" style="display:none; margin-top:20px;">
+    <h3>Select a Bingo Card:</h3>
+    <div id="bingoCardsContainer"></div>
 </div>
+
+<!-- Selected Bingo Card Display -->
+<div id="selectedBingoCardSection" style="display:none; margin-top:20px;">
+    <h3>Selected Bingo Card:</h3>
+    <p id="selectedBingoCardText"></p>
+    <div id="selectedBingoCardTable"></div>
+</div>
+<!--    <div class="table-container">-->
+<!--        <table>-->
+<!--            <caption>Lab week</caption>-->
+<!--            <tbody>-->
+<!--            <tr  th:each="array : ${selectedBingoCard.getBingoCard()}">-->
+<!--                <td th:each="item : ${array}">-->
+<!--                    <p th:unless="${item.startsWith('img:')}">-->
+<!--                        <span th:text="${item}"></span>-->
+<!--                    </p>-->
+<!--                    <p th:if="${item.startsWith('img:')}">-->
+<!--                        <img th:src="@{${item.substring(4)}}" alt="Image">-->
+<!--                    </p>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<script th:inline="javascript">
+    if (typeof bingoOptionsData === 'undefined') {
+        var bingoOptionsData = /*[[${bingoOptionsList}]]*/ [];
+        console.log("Loaded Bingo Lists:", bingoOptionsData);
+    }
+
+  function updateBingoCards() {
+    let selectedOptionId = document.getElementById("bingoOptions").value;
+    console.log("Selected List ID:", selectedOptionId);
+
+    let bingoCardsContainer = document.getElementById("bingoCardsContainer");
+    bingoCardsContainer.innerHTML = "";
+
+    if (selectedOptionId) {
+        let selectedBingoList = bingoOptionsData.find(item => item.id == selectedOptionId);
+        console.log("Selected Bingo List:", selectedBingoList);
+
+        if (selectedBingoList && selectedBingoList.bingoCards.length > 0) {
+            selectedBingoList.bingoCards.forEach(card => {
+                let radioBtn = document.createElement("input");
+                radioBtn.type = "radio";
+                radioBtn.name = "bingoCard";
+                radioBtn.value = card.id;
+                radioBtn.id = "card-" + card.id;
+                radioBtn.onclick = () => displaySelectedCard(card);
+
+                let label = document.createElement("label");
+                label.htmlFor = "card-" + card.id;
+                label.innerText = card.name ? card.name : "Card " + card.id;
+
+                let div = document.createElement("div");
+                div.appendChild(radioBtn);
+                div.appendChild(label);
+
+                bingoCardsContainer.appendChild(div);
+            });
+
+            document.getElementById("bingoCardsSection").style.display = "block";
+        } else {
+            console.log("No Bingo Cards found.");
+            document.getElementById("bingoCardsSection").style.display = "none";
+        }
+    } else {
+        document.getElementById("bingoCardsSection").style.display = "none";
+    }
+}
+
+  function displaySelectedCard(card) {
+    let selectedCardSection = document.getElementById("selectedBingoCardSection");
+    let selectedCardText = document.getElementById("selectedBingoCardText");
+
+    selectedCardText.innerHTML = `Selected Card: <strong>${card.name ? card.name : "Card " + card.id}</strong>`;
+
+    let tableContainer = document.getElementById("selectedBingoCardTable");
+    tableContainer.innerHTML = ""; // Clear previous table
+
+    let table = document.createElement("table");
+    table.innerHTML = `<caption>Lab week</caption><tbody></tbody>`;
+
+    card.bingoCard.forEach(row => {
+        let tr = document.createElement("tr");
+        row.forEach(item => {
+            let td = document.createElement("td");
+            if (item.startsWith("img:")) {
+                let img = document.createElement("img");
+                img.src = item.substring(4);
+                img.alt = "Image";
+                td.appendChild(img);
+            } else {
+                td.innerText = item;
+            }
+            tr.appendChild(td);
+        });
+        table.querySelector("tbody").appendChild(tr);
+    });
+
+    tableContainer.appendChild(table);
+    selectedCardSection.style.display = "block";
+}
+</script>
 
 </body>
 </html>

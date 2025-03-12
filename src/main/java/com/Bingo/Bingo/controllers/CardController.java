@@ -39,10 +39,13 @@ public class CardController {
     }
 
     @GetMapping("view")
-    //Show list of List to select from
     public String viewCardsList(Model model) {
-        //model.addAttribute("listData", listData.getList());
-        model.addAttribute("listData", bingoOptionsListRepository.findAll());
+        List<BingoOptionsList> bingoOptionsLists = new ArrayList<>();
+        bingoOptionsListRepository.findAll().forEach(bingoOptionsLists::add); // Convert Iterable to List
+
+        System.out.println("Bingo Lists Loaded: " + bingoOptionsLists);  // Debugging
+
+        model.addAttribute("bingoOptionsList", bingoOptionsLists);
         return "bingo/view";
     }
 

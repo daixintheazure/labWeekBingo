@@ -1,5 +1,6 @@
 package com.Bingo.Bingo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,8 @@ public class BingoOptionsList {
     inverseJoinColumns = @JoinColumn(name = "option_id"))
     private List<BingoOption> bingoOptionsList = new ArrayList<>();
 
-    @OneToMany (mappedBy = "bingoOptionsList", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "bingoOptionsList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<BingoCard> bingoCards;
 
 

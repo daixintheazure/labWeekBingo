@@ -1,6 +1,7 @@
 package com.Bingo.Bingo.models;
 
 import com.Bingo.Bingo.models.BingoOptionsList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ public class BingoCard {
 
     @ManyToOne
     @JoinColumn(name = "bingo_options_list_id")
+    @JsonBackReference
     private BingoOptionsList bingoOptionsList;
 
     @Lob
