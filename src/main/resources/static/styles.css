@@ -33,3 +33,14 @@
                 page-break-after: always;
             }
         }
+
+        ol {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        }
+
+        body {
+        margin: 30px;
+        }

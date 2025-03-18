@@ -7,6 +7,7 @@
 <header th:replace="fragments :: header"></header>
 <form method="post" th:action="@{/bingo/bingoLists}">
     <div>
+        <a>Enter a name</a>
         <input th:field="${bingoOptionsList.name}"/>
         <p th:errors="${bingoOptionsList.name}"></p>
         <input type="submit" value="Submit"/>
@@ -15,6 +16,7 @@
 </form>
 <hr/>
 <div>
+    <a>Click a list to edit the items on it. </a>
     <ol th:each="list: ${bingolist}">
         <li th:each="listname :${list.name}">
             <a th:href="@{'/bingo/bingoListEdit/' + ${list.id}}" th:text="${listname}"></a>

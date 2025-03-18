@@ -5,13 +5,15 @@
 <header th:replace="fragments :: header"></header>
 
     <div>
-        <a>Select a bingoOptionsList to edit</a>
+        <a>Generate a new Bingo Card</a>
         <ol>
             <li th:each="item : ${bingoOptionsList}">
                 <label th:text="${item.name}"></label>
                 <a th:href="@{'/bingo/results/' + ${item.id}}">
                     <button >Generate Bingo Card</button>
                 </a>
+                <hr/>
+                <a>Select a bingo card to edit it's name</a>
                 <div th:each="card : ${item.bingoCards}">
                     <a  th:href="@{'/bingo/bingoCard/' + ${card.id}}">
                         <button th:text="${card.name != null? card.name : card.id}"></button>
@@ -21,6 +23,5 @@
 
         </ol>
     </div>
-<hr/>
 </body>
 </html>
