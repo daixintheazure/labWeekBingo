@@ -3,28 +3,25 @@
 <head th:replace="fragments :: head">
 <body>
 <header th:replace="fragments :: header"></header>
-<form method="post" th:action="@{/bingo/Edit/{listPairId}}">
+
     <div>
-        <a>Select a list to edit</a>
-        <select name="listPairId" id="listPairId">
-            <option th:each="item : ${list}"
-            th:text="${item.name}" th:value="${item.id}"></option>
-        </select>
+        <a>Generate a new Bingo Card</a>
+        <ol>
+            <li th:each="item : ${bingoOptionsList}">
+                <label th:text="${item.name}"></label>
+                <a th:href="@{'/bingo/results/' + ${item.id}}">
+                    <button >Generate Bingo Card</button>
+                </a>
+                <hr/>
+                <a>Select a bingo card to edit it's name</a>
+                <div th:each="card : ${item.bingoCards}">
+                    <a  th:href="@{'/bingo/bingoCard/' + ${card.id}}">
+                        <button th:text="${card.name != null? card.name : card.id}"></button>
+                    </a>
+                </div>
+            </li>
 
+        </ol>
     </div>
-
-    <input type="submit" value="Generate"/>
-</form>
-<hr/>
-<div>
-    <ol th:each="thing: ${items}">
-        <li th:each="result :${thing.array}">
-            <a   th:text="${result}"></a>
-        </li>
-    </ol>
-
-
-</div>
-
 </body>
 </html>

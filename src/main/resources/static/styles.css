@@ -1,28 +1,46 @@
-table {
+.table-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 60%;
             border-collapse: collapse;
-            margin: auto; /* Center the table horizontally */
-            width: 400px; /* Set fixed width for the table */
+            table-layout: fixed; /* Ensures equal column width */
         }
-        caption {
-            font-weight: bold;
-            font-size: 40px;
-            padding: 10px;
-            caption-side: top;
-            text-align: center; /* Center the caption text */
-        }
+
         td {
+            width: 20%; /* Ensures equal width for all cells */
+            height: 100px; /* Ensures equal height for all cells */
+            text-align: center;
+            vertical-align: middle;
             border: 1px solid black;
-            padding: 10px;
-            width: 20%; /* Set equal width for each column */
-            text-align: center; /* Center align the text */
+            word-wrap: break-word; /* Ensures long words wrap inside the cell */
+            overflow: hidden;
         }
-        .table-container {
-                    page-break-after: always; /* Add page break after the table */
-                }
+
+        img {
+            max-width: 90%; /* Ensures images fit within the cell */
+            max-height: 90%; /* Limits the image size */
+            display: block;
+            margin: auto;
+        }
 
         @media print {
             .pagebreak {
                 clear: both;
                 page-break-after: always;
             }
+        }
+
+        ol {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        }
+
+        body {
+        margin: 30px;
         }

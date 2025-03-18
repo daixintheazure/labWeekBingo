@@ -1,21 +1,31 @@
 package com.Bingo.Bingo.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class OrderedOptions {
-    private ArrayList<String> array = new ArrayList<>();
-    public OrderedOptions (ArrayList<String> array) {
-        this.array = array;
+@Entity
+public class BingoCardGen {
+    @Id
+    @GeneratedValue
+    private int id;
+
+    private ArrayList<BingoOption> bingoCardOptions = new ArrayList<>();
+
+    public BingoCardGen(ArrayList<BingoOption> bingoCardOptions) {
+        this.bingoCardOptions = bingoCardOptions;
     }
 
     public ArrayList<String> randomized() {
-        ArrayList<String> tempList = this.array;
-        ArrayList<String> randomizedList = new ArrayList<>();
+        ArrayList<BingoOption> tempList = this.bingoCardOptions;
+        ArrayList<String> randomizedList = new ArrayList<String>();
         for(int i =0; i < 24;) {
             int random = (int) (Math.random() * tempList.size());
-            if(!randomizedList.contains(tempList.get(random))){
-                randomizedList.add(tempList.get(random));
+            if(!randomizedList.contains(tempList.get(random).toString())){
+                randomizedList.add(tempList.get(random).toString());
                 i++;
             }
 
@@ -23,7 +33,7 @@ public class OrderedOptions {
         return randomizedList;
     }
 
-    public ArrayList<ArrayList<String>> bingoCard() {
+    public ArrayList<ArrayList<String>> bingoCards() {
         ArrayList<String> tempRandom = this.randomized();
 
         ArrayList<ArrayList<String>> options = new ArrayList<ArrayList<String>>();
@@ -58,34 +68,29 @@ public class OrderedOptions {
     }
 
     @Override
-    public String toString() {
-        return array.toString();
-    }
-
-    //hash
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderedOptions that = (OrderedOptions) o;
-        return Objects.equals(array, that.array);
+        BingoCardGen that = (BingoCardGen) o;
+        return id == that.id && Objects.equals(bingoCardOptions, that.bingoCardOptions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(array);
+        return Objects.hash(id, bingoCardOptions);
     }
 
-    //Getters and setters
-    public ArrayList<String> getArray() {
-        return array;
+    @Override
+    public String toString() {
+        return bingoCardOptions.toString();
     }
 
-    public ArrayList<ArrayList<String>> getBingoSet(){
-        return this.bingoCard();
+    public int getId() {
+        return id;
     }
 
-    public void setArray(ArrayList<String> array) {
-        this.array = array;
+    public ArrayList<ArrayList<String>> getBingoCards() {
+        return this.bingoCards();
     }
+
 }

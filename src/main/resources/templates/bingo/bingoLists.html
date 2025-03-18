@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<h1></h1>
+<header th:replace="fragments :: header"></header>
+<form method="post" th:action="@{/bingo/bingoLists}">
+    <div>
+        <a>Enter a name</a>
+        <input th:field="${bingoOptionsList.name}"/>
+        <p th:errors="${bingoOptionsList.name}"></p>
+        <input type="submit" value="Submit"/>
+    </div>
+
+</form>
+<hr/>
+<div>
+    <a>Click a list to edit the items on it. </a>
+    <ol th:each="list: ${bingolist}">
+        <li th:each="listname :${list.name}">
+            <a th:href="@{'/bingo/bingoListEdit/' + ${list.id}}" th:text="${listname}"></a>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>

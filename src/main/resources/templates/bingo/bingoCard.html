@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
+</head>
 <body>
+<h1></h1>
 <header th:replace="fragments :: header"></header>
+<form>
 
+</form>
+<hr/>
 <div class="table-container" th:each="bingo : ${bingoList}">
-    <table style="width:60%">
+    <table>
         <caption>Lab week</caption>
+        <tbody>
         <tr  th:each="array : ${bingoList.getBingoCard()}">
-            <td style="height:100px" th:each="item : ${array}">
+            <td th:each="item : ${array}">
                 <p th:unless="${item.startsWith('img:')}">
                     <span th:text="${item}"></span>
                 </p>
                 <p th:if="${item.startsWith('img:')}">
-                    <img th:src="@{${item.substring(4)}}" width="150" height="150" alt="Image">
+                    <img th:src="@{${item.substring(4)}}" alt="Image">
                 </p>
             </td>
         </tr>
+        </tbody>
     </table>
-    <!--        <div class="pagebreak"></div>-->
 </div>
+
 </body>
 </html>
